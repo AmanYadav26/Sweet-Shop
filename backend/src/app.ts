@@ -10,6 +10,11 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/sweets", sweetsRoutes);
 
+// Health check / keep-alive route
+app.get("/api/ping", (req, res) => {
+  res.status(200).json({ status: "ok", time: new Date().toISOString() });
+});
+
 app.get("/", (req, res) => res.send({ message: "Sweet Shop API running" }));
 
 export default app;
